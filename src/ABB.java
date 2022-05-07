@@ -14,12 +14,36 @@ public class ABB extends AB {
 
         boolean achou = false;
 
-        while (!achou) {
-            if (elemento > no.getElement())
+        while (true) {
+            if (no.getElement() == elemento) {
+                return no.getPai();
+            }
+            if (elemento > no.getElemento()) {
                 if (temDireita(no))
                     no = no.getFilhoDir();
-                else achou = true;
+                else {
+                    return no;
+                }
+            } else {
+                if (temEsquera(no)) {
+                    no = no.getFilhoDir();
+                } else {
+                    return no;
+                }
+            }
         }
+    }
+
+    public No buscaElemento(int elemento) {
+        No pai = buscaPai(elemento);
+
+        if (pai == null) return null;
+
+        if (pai.getElemento() > elemento)
+            return pai.getFilhoEsq();
+
+        return pai.getFilhoDir();
+
     }
 
 }
